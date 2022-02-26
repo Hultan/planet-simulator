@@ -76,12 +76,12 @@ func (l *Loader) getLoaderPath() string {
 }
 
 func (l *Loader) fixColors(solar *data.SolarSystem) {
-	for i := range solar.Objects {
-		c, err := parseHexColorFast(solar.Objects[i].Color)
+	for i := range solar.Bodies {
+		c, err := parseHexColorFast(solar.Bodies[i].Color)
 		if err != nil {
 			panic(err)
 		}
-		solar.Objects[i].ColorObj = c
+		solar.Bodies[i].ColorObj = c
 	}
 }
 

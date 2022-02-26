@@ -1,62 +1,81 @@
 {
   "centerX": 400,
   "centerY": 400,
-  "objects": [
+  "bodies": [
     {
       "name" : "sun",
-      "mass": 100,
+      "isSun": true,
+      "mass": 1.98892e30,
       "color": "#FFFF00",
-      "x": 100,
-      "y": 100
-    },
-    {
-      "name" : "mercury",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 200,
-      "y": 200
-    },
-    {
-      "name" : "venus",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 300,
-      "y": 300
+      "radius": 30,
+      "position" : {
+        "x": 0,
+        "y": 0
+      },
+      "velocity" : {
+        "x" : 0,
+        "y" : 0
+      }
     },
     {
       "name" : "earth",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 400,
-      "y": 400
+      "isSun": false,
+      "mass": 5.9742e24,
+      "color": "#6495ED",
+      "radius": 16,
+      "position" : {
+        "x": -1,
+        "y": 0
+      },
+      "velocity" : {
+        "x" : 0,
+        "y" : 29783
+      }
     },
     {
       "name" : "mars",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 500,
-      "y": 500
+      "isSun": false,
+      "mass": 6.39E23,
+      "color": "#BC2732",
+      "radius": 12,
+      "position" : {
+        "x": -1.524,
+        "y": 0
+      },
+      "velocity" : {
+        "x" : 0,
+        "y" : 24077
+      }
     },
     {
-      "name" : "jupiter",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 600,
-      "y": 600
+      "name" : "mercury",
+      "isSun": false,
+      "mass": 3.3E23,
+      "color": "#504751",
+      "radius": 8,
+      "position" : {
+        "x": 0.387,
+        "y": 0
+      },
+      "velocity" : {
+        "x" : 0,
+        "y" : -47400
+      }
     },
     {
-      "name" : "uranus",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 700,
-      "y": 700
-    },
-    {
-      "name" : "saturn",
-      "mass": 1,
-      "color": "#0000FF",
-      "x": 800,
-      "y": 800
+      "name" : "venus",
+      "isSun": false,
+      "mass": 4.8685e24,
+      "color": "#FFFFFF",
+      "radius": 14,
+      "position" : {
+        "x": 0.723,
+        "y": 0
+      },
+      "velocity" : {
+        "x" : 0,
+        "y" : -35020
+      }
     }
   ]
 }

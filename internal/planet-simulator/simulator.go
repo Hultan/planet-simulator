@@ -23,21 +23,21 @@ type PlanetSimulator struct {
 }
 
 func NewPlanetSimulator(w *gtk.ApplicationWindow, da *gtk.DrawingArea) *PlanetSimulator {
-	t := &PlanetSimulator{window: w, drawingArea: da}
-	t.window.Connect("key-press-event", t.onKeyPressed)
+	p := &PlanetSimulator{window: w, drawingArea: da}
+	p.window.Connect("key-press-event", p.onKeyPressed)
 
+	// Load json file with a solar system
 	l := loader.NewLoader()
 	d, err := l.Load()
 	if err != nil {
 		panic(err)
 	}
-	t.data = d
+	p.data = d
 
-	return t
+	return p
 }
 
 func (p *PlanetSimulator) StartGame() {
-	p.window.Maximize()
 	p.drawingArea.Connect("draw", p.onDraw)
 	p.speed = 500
 	p.ticker = time.NewTicker(p.speed * time.Millisecond)
@@ -50,6 +50,7 @@ func (p *PlanetSimulator) mainLoop() {
 	for {
 		select {
 		case <-p.ticker.C:
+			p.calculateMovements()
 			p.drawingArea.QueueDraw()
 		case <-p.tickerQuit:
 			p.isActive = false
@@ -75,5 +76,12 @@ func (p *PlanetSimulator) quit() {
 	if p.isActive {
 		p.isActive = false
 		close(p.tickerQuit) // Stop ticker
+	}
+}
+
+func (p *PlanetSimulator) calculateMovements() {
+	for i := range p.data.Bodies {
+		body := p.data.Bodies[i]
+		body.UpdatePosition(p.data, TIMESTEP)
 	}
 }

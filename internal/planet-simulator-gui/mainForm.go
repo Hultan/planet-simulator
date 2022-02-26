@@ -45,6 +45,7 @@ func (m *MainForm) OpenMainForm(app *gtk.Application) {
 	// Set up main window
 	m.window.SetApplication(app)
 	m.window.SetTitle("Planet simulator main window")
+	m.window.SetSizeRequest(planet_simulator.WIDTH, planet_simulator.HEIGHT)
 
 	// Hook up the destroy event
 	m.window.Connect("destroy", m.window.Close)
