@@ -37,8 +37,8 @@ func (p *PlanetSimulator) drawBackground(da *gtk.DrawingArea, ctx *cairo.Context
 func (p *PlanetSimulator) drawPlanet(da *gtk.DrawingArea, ctx *cairo.Context, planet *data.Body) {
 	width := float64(da.GetAllocatedWidth())
 	height := float64(da.GetAllocatedHeight())
-	x := planet.Position.X*AU*SCALE + width/2 // TODO : Fix center coords, use translation?
-	y := planet.Position.Y*AU*SCALE + height/2
+	x := planet.Position.X*SCALE + width/2 // TODO : Fix center coords, use translation?
+	y := planet.Position.Y*SCALE + height/2
 	p.setColor(ctx, planet.ColorObj)
 	ctx.Arc(x, y, planet.Radius, 0, 2*math.Pi)
 	ctx.Fill()

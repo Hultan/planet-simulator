@@ -12,6 +12,8 @@ import (
 	"github.com/hultan/planet-simulator/internal/data"
 )
 
+const AU = 149.6e9
+
 type Loader struct {
 }
 
@@ -50,6 +52,7 @@ func (l *Loader) Load() (solar *data.SolarSystem, err error) {
 	}
 
 	l.fixColors(solar)
+	l.fixDistances(solar)
 
 	return solar, nil
 }
@@ -82,6 +85,13 @@ func (l *Loader) fixColors(solar *data.SolarSystem) {
 			panic(err)
 		}
 		solar.Bodies[i].ColorObj = c
+	}
+}
+
+func (l *Loader) fixDistances(solar *data.SolarSystem) {
+	for i := range solar.Bodies {
+		body := solar.Bodies[i]
+		body.Position = body.Position.Mul(AU)
 	}
 }
 

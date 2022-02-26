@@ -13,10 +13,10 @@ type Body struct {
 	Radius   float64
 	Mass     float64
 	Position Vector2
+	Velocity Vector2
 	Color    string
 	ColorObj color.Color
 
-	velocity      Vector2
 	distanceToSun float64
 	orbit         []Vector2
 }
@@ -43,7 +43,7 @@ func (b *Body) UpdatePosition(solar *SolarSystem, timestamp float64) {
 		}
 		total = total.Add(b.CalculateAttraction(body))
 	}
-	b.velocity = b.velocity.Add(total.Div(b.Mass).Mul(timestamp)) // F = m*a  &  a = v*t
-	b.Position = b.Position.Add(b.velocity.Mul(timestamp))
+	b.Velocity = b.Velocity.Add(total.Mul(timestamp / b.Mass)) // F = m*a  &  a = v*t
+	b.Position = b.Position.Add(b.Velocity.Mul(timestamp))
 	b.orbit = append(b.orbit, b.Position)
 }

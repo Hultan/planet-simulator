@@ -39,7 +39,7 @@ func NewPlanetSimulator(w *gtk.ApplicationWindow, da *gtk.DrawingArea) *PlanetSi
 
 func (p *PlanetSimulator) StartGame() {
 	p.drawingArea.Connect("draw", p.onDraw)
-	p.speed = 500
+	p.speed = 50
 	p.ticker = time.NewTicker(p.speed * time.Millisecond)
 	p.tickerQuit = make(chan struct{})
 
