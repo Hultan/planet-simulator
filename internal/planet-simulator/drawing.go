@@ -10,8 +10,16 @@ import (
 	"github.com/hultan/planet-simulator/internal/data"
 )
 
+var center = data.Vector2{}
+var width float64
+var height float64
+
 // onDraw : The onDraw signal handler
 func (p *PlanetSimulator) onDraw(da *gtk.DrawingArea, ctx *cairo.Context) {
+	width = float64(da.GetAllocatedWidth())
+	height = float64(da.GetAllocatedHeight())
+	center = data.Vector2{X: width / 2, Y: height / 2}
+
 	p.drawBackground(da, ctx)
 
 	for i := range p.data.Bodies {
@@ -26,8 +34,6 @@ func (p *PlanetSimulator) onDraw(da *gtk.DrawingArea, ctx *cairo.Context) {
 
 // drawBackground : Draws the background
 func (p *PlanetSimulator) drawBackground(da *gtk.DrawingArea, ctx *cairo.Context) {
-	width := float64(da.GetAllocatedWidth())
-	height := float64(da.GetAllocatedHeight())
 	p.setColor(ctx, color.Black)
 	ctx.Rectangle(0, 0, width, height)
 	ctx.Fill()
@@ -35,13 +41,28 @@ func (p *PlanetSimulator) drawBackground(da *gtk.DrawingArea, ctx *cairo.Context
 
 // drawPlanet : Draws a planet
 func (p *PlanetSimulator) drawPlanet(da *gtk.DrawingArea, ctx *cairo.Context, planet *data.Body) {
-	width := float64(da.GetAllocatedWidth())
-	height := float64(da.GetAllocatedHeight())
-	x := planet.Position.X*SCALE + width/2 // TODO : Fix center coords, use translation?
-	y := planet.Position.Y*SCALE + height/2
+	// Scale position and center it
+	c := planet.Position.Mul(SCALE).Add(center)
+
 	p.setColor(ctx, planet.ColorObj)
-	ctx.Arc(x, y, planet.Radius, 0, 2*math.Pi)
+	p.drawPlanetOrbit(da, ctx, planet)
+	ctx.Arc(c.X, c.Y, planet.Radius, 0, 2*math.Pi)
 	ctx.Fill()
+}
+
+func (p *PlanetSimulator) drawPlanetOrbit(da *gtk.DrawingArea, ctx *cairo.Context, planet *data.Body) {
+	ctx.SetLineWidth(1)
+	for i, point := range planet.Orbit {
+		// Scale position and center it
+		pos := point.Mul(SCALE).Add(center)
+
+		if i == 0 {
+			ctx.MoveTo(pos.X, pos.Y)
+		} else {
+			ctx.LineTo(pos.X, pos.Y)
+		}
+	}
+	ctx.Stroke()
 }
 
 // setColor : Sets the draw color to and RGB color
