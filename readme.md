@@ -11,6 +11,6 @@ Written in Go, using GTK.
 ## SCREENSHOT
 
 (to be replaced later, with a real screenshot)
-![screenshot](assets/screenshot2.png)
+![screenshot](assets/screenshot.png)
 
 ## TODO
