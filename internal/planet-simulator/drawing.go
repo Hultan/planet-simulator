@@ -33,7 +33,7 @@ func (p *PlanetSimulator) onDraw(da *gtk.DrawingArea, ctx *cairo.Context) {
 //
 
 // drawBackground : Draws the background
-func (p *PlanetSimulator) drawBackground(da *gtk.DrawingArea, ctx *cairo.Context) {
+func (p *PlanetSimulator) drawBackground(_ *gtk.DrawingArea, ctx *cairo.Context) {
 	p.setColor(ctx, color.Black)
 	ctx.Rectangle(0, 0, width, height)
 	ctx.Fill()
@@ -50,7 +50,7 @@ func (p *PlanetSimulator) drawPlanet(da *gtk.DrawingArea, ctx *cairo.Context, pl
 	ctx.Fill()
 }
 
-func (p *PlanetSimulator) drawPlanetOrbit(da *gtk.DrawingArea, ctx *cairo.Context, planet *data.Body) {
+func (p *PlanetSimulator) drawPlanetOrbit(_ *gtk.DrawingArea, ctx *cairo.Context, planet *data.Body) {
 	ctx.SetLineWidth(1)
 	for i, point := range planet.Orbit {
 		// Scale position and center it
