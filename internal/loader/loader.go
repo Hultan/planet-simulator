@@ -12,8 +12,10 @@ import (
 	"github.com/hultan/planet-simulator/internal/data"
 )
 
-const AU = 149.6e9
+// au : Constant for the astronomical unit. Needed to correct the JSON-data
+const au = 149.6e9
 
+// Loader : Loads a JSON file containing the solar system
 type Loader struct {
 }
 
@@ -78,9 +80,10 @@ func (l *Loader) getLoaderPath() string {
 	return path.Join(home, defaultDataPath)
 }
 
+// fixColors : Converts HEX colors to RGB colors
 func (l *Loader) fixColors(solar *data.SolarSystem) {
 	for i := range solar.Bodies {
-		c, err := parseHexColorFast(solar.Bodies[i].Color)
+		c, err := parseHexColor(solar.Bodies[i].Color)
 		if err != nil {
 			panic(err)
 		}
@@ -88,16 +91,19 @@ func (l *Loader) fixColors(solar *data.SolarSystem) {
 	}
 }
 
+// fixDistances : The JSON contains data in AU, application needs it in meters
 func (l *Loader) fixDistances(solar *data.SolarSystem) {
 	for i := range solar.Bodies {
 		body := solar.Bodies[i]
-		body.Position = body.Position.Mul(AU)
+		body.Position = body.Position.Mul(au)
 	}
 }
 
 var errInvalidFormat = errors.New("invalid format")
 
-func parseHexColorFast(s string) (c color.RGBA, err error) {
+// parseHexColor : Parses colors in HEX format and returns an RGB color
+// https://stackoverflow.com/questions/54197913/parse-hex-string-to-image-color
+func parseHexColor(s string) (c color.RGBA, err error) {
 	c.A = 0xff
 
 	if s[0] != '#' {

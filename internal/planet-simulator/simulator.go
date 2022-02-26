@@ -10,6 +10,7 @@ import (
 	"github.com/hultan/planet-simulator/internal/loader"
 )
 
+// PlanetSimulator : The planet simulator struct
 type PlanetSimulator struct {
 	window      *gtk.ApplicationWindow
 	drawingArea *gtk.DrawingArea
@@ -19,9 +20,10 @@ type PlanetSimulator struct {
 	speed      time.Duration
 	isActive   bool
 
-	data *data.SolarSystem
+	data *data.SolarSystem // Solar system data
 }
 
+// NewPlanetSimulator : Constructor for a PlanetSimulator
 func NewPlanetSimulator(w *gtk.ApplicationWindow, da *gtk.DrawingArea) *PlanetSimulator {
 	p := &PlanetSimulator{window: w, drawingArea: da}
 	p.window.Connect("key-press-event", p.onKeyPressed)
@@ -37,7 +39,8 @@ func NewPlanetSimulator(w *gtk.ApplicationWindow, da *gtk.DrawingArea) *PlanetSi
 	return p
 }
 
-func (p *PlanetSimulator) StartGame() {
+// StartSimulator : Starts the simulation
+func (p *PlanetSimulator) StartSimulator() {
 	p.drawingArea.Connect("draw", p.onDraw)
 	p.speed = 50
 	p.ticker = time.NewTicker(p.speed * time.Millisecond)
@@ -46,6 +49,7 @@ func (p *PlanetSimulator) StartGame() {
 	go p.mainLoop()
 }
 
+// mainLoop : Start the main loop
 func (p *PlanetSimulator) mainLoop() {
 	for {
 		select {
@@ -72,6 +76,7 @@ func (p *PlanetSimulator) onKeyPressed(_ *gtk.ApplicationWindow, e *gdk.Event) {
 	p.drawingArea.QueueDraw()
 }
 
+// quit : Stops the simulation and quits the application
 func (p *PlanetSimulator) quit() {
 	if p.isActive {
 		p.isActive = false
@@ -79,6 +84,7 @@ func (p *PlanetSimulator) quit() {
 	}
 }
 
+// calculateMovements : Calculates the planets movements each cycle
 func (p *PlanetSimulator) calculateMovements() {
 	for i := range p.data.Bodies {
 		body := p.data.Bodies[i]

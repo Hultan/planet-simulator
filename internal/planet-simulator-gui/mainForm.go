@@ -69,7 +69,7 @@ func (m *MainForm) OpenMainForm(app *gtk.Application) {
 
 	// Create new game object
 	t := planet_simulator.NewPlanetSimulator(m.window, m.da)
-	t.StartGame()
+	t.StartSimulator()
 }
 
 func (m *MainForm) setupMenu(fw *framework.Framework) {

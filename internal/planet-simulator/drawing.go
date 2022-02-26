@@ -44,6 +44,7 @@ func (p *PlanetSimulator) drawPlanet(da *gtk.DrawingArea, ctx *cairo.Context, pl
 	ctx.Fill()
 }
 
+// setColor : Sets the draw color to and RGB color
 func (p *PlanetSimulator) setColor(ctx *cairo.Context, c color.Color) {
 	r, g, b, a := c.RGBA()
 	ctx.SetSourceRGBA(col(r), col(g), col(b), col(a))
