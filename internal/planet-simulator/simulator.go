@@ -5,6 +5,9 @@ import (
 
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+
+	"github.com/hultan/planet-simulator/internal/data"
+	"github.com/hultan/planet-simulator/internal/loader"
 )
 
 type PlanetSimulator struct {
@@ -16,15 +19,19 @@ type PlanetSimulator struct {
 	speed      time.Duration
 	isActive   bool
 
-	objects []object
-}
-
-type object struct {
+	data *data.SolarSystem
 }
 
 func NewPlanetSimulator(w *gtk.ApplicationWindow, da *gtk.DrawingArea) *PlanetSimulator {
 	t := &PlanetSimulator{window: w, drawingArea: da}
 	t.window.Connect("key-press-event", t.onKeyPressed)
+
+	l := loader.NewLoader()
+	d, err := l.Load()
+	if err != nil {
+		panic(err)
+	}
+	t.data = d
 
 	return t
 }

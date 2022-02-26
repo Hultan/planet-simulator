@@ -1,0 +1,62 @@
+{
+  "centerX": 400,
+  "centerY": 400,
+  "objects": [
+    {
+      "name" : "sun",
+      "mass": 100,
+      "color": "#FFFF00",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "name" : "mercury",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 200,
+      "y": 200
+    },
+    {
+      "name" : "venus",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 300,
+      "y": 300
+    },
+    {
+      "name" : "earth",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 400,
+      "y": 400
+    },
+    {
+      "name" : "mars",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 500,
+      "y": 500
+    },
+    {
+      "name" : "jupiter",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 600,
+      "y": 600
+    },
+    {
+      "name" : "uranus",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 700,
+      "y": 700
+    },
+    {
+      "name" : "saturn",
+      "mass": 1,
+      "color": "#0000FF",
+      "x": 800,
+      "y": 800
+    }
+  ]
+}
